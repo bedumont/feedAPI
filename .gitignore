@@ -1,0 +1,9 @@
+*.log
+
+.git/
+bin/
+include/
+lib/
+lib64
+__*
+
