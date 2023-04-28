@@ -12,8 +12,6 @@ from feedAPI.model.tables import Comment
 app = Flask(__name__)
 
 # Some parameters, should end up in a file at some point
-FEEDBACK_FILE = "./feedbacks.json"
-REACTION_FILE = "./reactions.json"
 DATABASE = os.path.abspath("./database.db")
 DEBUG = True
 
@@ -26,13 +24,10 @@ if not os.path.isfile(DATABASE):
 
 @app.route("/feedback")
 def get_feedbacks():
-    #session = Session(engine)
-    #stmt = select(Feedback)
-    #result = []
-    #for feedback in session.scalars(stmt):
-    #    print(feedback)
-    #_return "", 204
-    feedbacks = Feedback.query.all()
+    session = Session(engine)
+    feedbacks = []
+    for f in session.query(Feedback).all():
+        feedbacks.append(f.as_dict())
     return jsonify(feedbacks)
 
 
