@@ -30,5 +30,5 @@ Init a git repo and switch to a dev branch
 ### Basic Flask server
 Create a working Flask server, responding to HTTP queries and verify it's working.
 ### Base module with classes
-I setup a module model with two classes, one for the feedback table and the other for the reaction table
+I setup a model module with two classes, one for the feedback table and the other for the reaction table
 Reactions can be a comment about a feedback,
