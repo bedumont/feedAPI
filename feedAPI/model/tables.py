@@ -3,6 +3,7 @@ from typing import Optional
 from sqlalchemy import String
 from sqlalchemy import DateTime
 from sqlalchemy import ForeignKey
+from sqlalchemy import func, select, update
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
@@ -102,7 +103,10 @@ class Reaction(Base):
     value: Mapped[int] = mapped_column()  # +1 -1 or 0
     datetime: Mapped[datetime] = mapped_column(DateTime())
 
+    feedback: Mapped["Feedback"] = relationship()
+    comment: Mapped["Comment"] = relationship()
+
     def __repr__(self):
         """ Represents a reaction as a string for logging
         """
-        return '<Reaction to feedback(id={self.id} source={self.ip} fb_id={self.fb_id} cmt_id={self.cmt_id} datetime={self.datetime})>'.format(self=self)
+        return '<Reaction to feedback(id={self.id} source={self.source} fb_id={self.fb_id} cmt_id={self.cmt_id} datetime={self.datetime})>'.format(self=self)
