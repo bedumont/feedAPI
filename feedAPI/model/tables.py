@@ -27,7 +27,8 @@ class Base(DeclarativeBase):
         """
         if data is not None:
             for key in data:
-                setattr(self, key, data[key])
+                if key in self.__table__.columns:
+                    setattr(self, key, data[key]) # Prevent from :
 
 class Feedback(Base):
     """ Declarative description of the feedbacks table
