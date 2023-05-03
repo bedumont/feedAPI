@@ -129,31 +129,3 @@ def react_to_comment(id):
             return 'Internal error: multiple resources with same id', 500
         finally:
             session.commit()
-
-
-@app.route("/reaction", methods=['GET'])
-def get_all_reactions():
-    """ Retrieves all feedbacks
-    Uses a GET call to route /feedback
-    Returns a json and code 200 in case of success
-    """
-    session = Session(engine)
-    reactions = []
-    for r in session.query(Reaction).all():
-        reactions.append(r.as_dict())
-    return jsonify(reactions), 200
-
-
-@app.route("/test", methods=["GET"])
-def sum_values():
-    session = Session(engine)
-    Feedback.check_score(session)
-#    query = session.query(
-#        Feedback.id,
-#        Feedback.score,
-#        func.sum(Reaction.value)
-#    ).join(Reaction.feedback
-#    ).group_by(Reaction.fb_id)
-#    for r in query.all():
-#        print(r)
-    return '', 200

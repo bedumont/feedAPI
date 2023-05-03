@@ -55,6 +55,32 @@ class Feedback(Base):
         """
         return '<Feedback(id={self.id} ip={self.source} datetime={self.datetime})>'.format(self=self)
 
+    def compute_score(session):
+        """ Update the score of all the feedbacks that were affected by reactions.
+        Should be run asynchronuously (for example by a cron job) to provide 
+        eventual consistency.
+        """
+        subq = (
+                select(1+func.sum(Reaction.value).label("total"))
+                .where(Reaction.fb_id==Feedback.id)
+                .group_by(Reaction.fb_id)
+                .scalar_subquery()
+                )
+
+        exist_subq = (
+                select(Feedback.id)
+                .where(Reaction.fb_id == Feedback.id)
+                .exists()
+                )
+
+        stmt = (
+                update(Feedback)
+                .values(score=subq)
+                .where(exist_subq)
+                )
+        session.execute(stmt)
+        session.commit()
+
 
 class Comment(Base):
     """ Declarative description of the comments table
@@ -80,6 +106,32 @@ class Comment(Base):
         """ Represents a comment as a string for logging
         """
         return '<Comment(id={self.id} source={self.ip} target={self.target} datetime={self.datetime})>'.format(self=self)
+
+    def compute_score(session):
+        """ Update the score of all the comments that were affected by reactions.
+        Should be run asynchronuously (for example by a cron job) to provide
+        eventual consistency.
+        """
+        subq = (
+                select(func.sum(Reaction.value).label("total"))
+                .where(Reaction.cmt_id==Comment.id)
+                .group_by(Reaction.cmt_id)
+                .scalar_subquery()
+                )
+
+        exist_subq = (
+                select(Comment.id)
+                .where(Reaction.cmt_id == Comment.id)
+                .exists()
+                )
+
+        stmt = (
+                update(Comment)
+                .values(score=subq)
+                .where(exist_subq)
+                )
+        session.execute(stmt)
+        session.commit()
 
 
 class Reaction(Base):
