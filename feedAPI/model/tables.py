@@ -48,12 +48,12 @@ class Feedback(Base):
     text: Mapped[Optional[str]] = mapped_column(String(250))
     grade: Mapped[int] = mapped_column()
     score: Mapped[int] = mapped_column(default=1)
-    datetime: Mapped[datetime] = mapped_column(DateTime())
+    datetime: Mapped[datetime]
 
     def __repr__(self):
         """ Represents a feedback as a string for logging
         """
-        return '<Feedback(id={self.id} ip={self.source} datetime={self.datetime})>'.format(self=self)
+        return '<Feedback(id={self.id} source={self.source} datetime={self.datetime})>'.format(self=self)
 
     def compute_score(session):
         """ Update the score of all the feedbacks that were affected by reactions.
@@ -100,12 +100,12 @@ class Comment(Base):
     source: Mapped[str] = mapped_column(String(15))
     text: Mapped[Optional[str]] = mapped_column(String(250))
     score: Mapped[int] = mapped_column(default=1)
-    datetime: Mapped[datetime] = mapped_column(DateTime())
+    datetime: Mapped[datetime]
 
     def __repr__(self):
         """ Represents a comment as a string for logging
         """
-        return '<Comment(id={self.id} source={self.ip} target={self.target} datetime={self.datetime})>'.format(self=self)
+        return '<Comment(id={self.id} source={self.source} target={self.target} datetime={self.datetime})>'.format(self=self)
 
     def compute_score(session):
         """ Update the score of all the comments that were affected by reactions.
@@ -154,7 +154,7 @@ class Reaction(Base):
     cmt_id: Mapped[Optional[int]] = mapped_column(ForeignKey("comments.id"))
     source: Mapped[str] = mapped_column(String(15))
     value: Mapped[int] = mapped_column()  # +1 -1 or 0
-    datetime: Mapped[datetime] = mapped_column(DateTime())
+    datetime: Mapped[datetime]
 
     feedback: Mapped["Feedback"] = relationship()
     comment: Mapped["Comment"] = relationship()
