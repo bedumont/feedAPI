@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /home/ben/code/feedAPI-project/feedAPI
+cd $HOME/.local/feedAPI-project/feedAPI
 export FLASK_APP=./index.py
 . ../.venv/bin/activate
 echo $VIRTUAL_ENV
