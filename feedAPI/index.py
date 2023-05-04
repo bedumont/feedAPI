@@ -81,6 +81,8 @@ def create_resource():
     typeOfResource = Feedback if re.search("^/feedback", request.path) else Comment
     data = request.get_json()
     timestamp = int(data["datetime"])
+    if 'grade' in data && data['grade'] not in ("1", "2", "3", "4", "5") :
+        return "Invalid grade value", 400
     data["datetime"] = datetime.fromtimestamp(timestamp)
     with Session(engine) as session:
         resource = typeOfResource(data)
@@ -94,7 +96,7 @@ def create_resource():
 @app.route("/comment/<id>", methods=['PUT'])
 def react_to_comment(id):
     """ Reacts to comment <id>
-    Uses a PUT call to route /[typeOfResource]/<id> (typeOfResource can be Feedback or Comment
+    Uses a PUT call to route /[typeOfResource]/<id> (typeOfResource can be Feedback or Comment)
     Ignores cmt_id and fb_id and replaces each with <id> or None based on the path
     Returns code 201 in case of success
     """
