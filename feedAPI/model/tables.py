@@ -105,7 +105,7 @@ class Comment(Base):
     def __repr__(self):
         """ Represents a comment as a string for logging
         """
-        return '<Comment(id={self.id} source={self.ip} target={self.target} datetime={self.datetime})>'.format(self=self)
+        return '<Comment(id={self.id} ip={self.source} target={self.target} datetime={self.datetime})>'.format(self=self)
 
     def compute_score(session):
         """ Update the score of all the comments that were affected by reactions.
