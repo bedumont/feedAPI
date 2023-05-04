@@ -81,7 +81,7 @@ def create_resource():
     typeOfResource = Feedback if re.search("^/feedback", request.path) else Comment
     data = request.get_json()
     timestamp = int(data["datetime"])
-    if 'grade' in data && data['grade'] not in ("1", "2", "3", "4", "5") :
+    if 'grade' in data and data['grade'] not in ("1", "2", "3", "4", "5") :
         return "Invalid grade value", 400
     data["datetime"] = datetime.fromtimestamp(timestamp)
     with Session(engine) as session:
