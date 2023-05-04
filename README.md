@@ -19,13 +19,13 @@ requirements.txt contains the python packages for easy venv deployment.
 Routes are defined within Flask to answer different HTTP requests (GET, POST and PUT).
 The following route are defined :
 * /feedback (GET) to fetch all feedbacks ;
-* /feedback/<id>/comments (GET) to fetch the comment related to feedback with id <id>;
-* /feedback/<id> (GET) to fetch feedback with id <id> ;
-* /comment/<id> (GET) to fetch comment with id <id> ;
+* /feedback/\<id\>/comments (GET) to fetch the comment related to feedback with id \<id\>;
+* /feedback/\<id\> (GET) to fetch feedback with id \<id\> ;
+* /comment/\<id\> (GET) to fetch comment with id \<id\> ;
 * /feedback (POST) to post a feedback ;
 * /comment (POST) to post a feedback ;
-* /feedback/<id> (PUT) to react to feedback with id <id> ;
-* /comment/\<id\> (PUT) to react to comment with id <id>.
+* /feedback/\<id\> (PUT) to react to feedback with id \<id\> ;
+* /comment/\<id\> (PUT) to react to comment with id \<id\>.
 
 
 # Initial thoughts on the project
