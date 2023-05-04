@@ -24,8 +24,8 @@ The following route are defined :
 * /comment/<id> (GET) to fetch comment with id <id> ;
 * /feedback (POST) to post a feedback ;
 * /comment (POST) to post a feedback ;
-* /feedback/<id> (PUT) to react to feedback of id <id> ;
-* /comment/<id> (PUT) to react to comment of id <id>.
+* /feedback/<id> (PUT) to react to feedback with id <id> ;
+* /comment/\<id\> (PUT) to react to comment with id <id>.
 
 
 # Initial thoughts on the project
