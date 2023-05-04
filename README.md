@@ -74,14 +74,11 @@ Unit testing, for example, coulb setup to test the different route independetly.
 ### Choose which paradigme to use
 A RESTful API seemed like a good choice.
 Microservices are all the rage but for such a little application it would be overkill.
-Plus I have never worked with this paradigm.
-But I understand the attraction and as I have three services to implement it is still a valid choice.
 As I am to focus on the back-end I also chose to setup a SQLite db and use it directly if come to the front-end instead of local data.
-Two tables seem sufficient, one for the feedbacks and the other for the reactions to the feedback
+Three tables seem sufficient, one for the feedbacks, one for the comments and the last for the reactions.
 
 ### Choose a technology stack
 A quick search confirmed Flask would provide all I need for a REST implementation.
-If installed with [async], we can get Flask to respond asynchronically to requests.
 Flask-SQLAlchemy will be used as an ORM to interact with the DB.
 
 As for  the db, I will use SQLite as it is adequate for a small project like this.
