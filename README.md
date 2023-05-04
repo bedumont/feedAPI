@@ -101,7 +101,7 @@ They contain the declarative mapping to the database columns for the ORM.
 
 I also added a function to instanciate the different classes from a dict (useful with JSON data). This function checks if the key is a column to prevent overwriting methods of the class with string (for example).
 
-__repr__ functions are defined to correctly log event related to the tables.
+\_\_repr\_\_ functions are defined to correctly log event related to the tables.
 
 At last, a function to compute the score of each resource based on the initial score of 1 and the subsequent upvotes and downvotes through the reactions.
 Reaction normally update the score of the resource they are related to.
